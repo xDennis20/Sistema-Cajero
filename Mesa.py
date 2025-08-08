@@ -9,6 +9,3 @@ class Mesa:
         self.pedidos.append({"Comida": nombre,"Precio": precio})
         self.total += precio
         print(self.pedidos)
-
-prueba = Mesa(1)
-prueba.agregar_pedido("Arro con pollo",2.50)
