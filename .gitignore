@@ -1,6 +1,7 @@
 # IDE's
 .vscode
 .idea
+.idea/vcs.xml
 # Entorno virtual de Python
 venv/
 
