@@ -8,4 +8,3 @@ class Mesa:
     def agregar_pedido(self, nombre: str, precio: float):
         self.pedidos.append({"Comida": nombre,"Precio": precio})
         self.total += precio
-        print(self.pedidos)
