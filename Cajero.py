@@ -4,6 +4,7 @@ from Mesa import Mesa
 class Cajero:
     def __init__(self):
         self.mesas: Dict[int, Mesa] = {}
+        self.ventas_dia = []
     
     def crear_mesa(self, numero: int):
         if numero in self.mesas:
@@ -27,6 +28,8 @@ class Cajero:
                 print(f"Falta ${(mesa.total - dinero_cliente):.2f} para poder cubrir el total.")
                 return
             vuelto = dinero_cliente - mesa.total
+            self.ventas_dia.extend(mesa.pedidos)
+            self.mesas[numero_mesa] = Mesa(numero_mesa)
             print(f"Vuelto a dar al cliente es: {vuelto:.2f}")
         else:
             print("La mesa que ingreso no existe")
