@@ -1,21 +1,19 @@
 from openpyxl import Workbook
-from Cajero import Cajero
+from datetime import datetime
 
 class Exportador:
     @staticmethod
-    def exportar_pedidos_excel():
+    def exportar_pedidos_excel(list_pedidos):
         wb = Workbook()
         hoja = wb.active
-        lista = Cajero().ventas_dia
         hoja["A1"] = "Mesa"
         hoja["B1"] = "Pedido"
         hoja["C1"] = "Precio"
+        hoja["D1"] = "Fecha"
 
-        fila = 2
-        for pedido in lista:
-            hoja.cell(row= fila,column=1,value=pedido.get("Mesa"))
-            hoja.cell(row= fila,column=2,value=pedido.get("Pedido"))
-            hoja.cell(row= fila,column=3,value=pedido.get("Precio"))
-            fila+=1
+        for mesa in list_pedidos:
+            for pedido in mesa.pedidos:
+                hoja.append([mesa.numero, pedido["Comida"], pedido["Precio"], datetime.now().strftime("%d/%m/%Y")])
 
         wb.save("Pedidos.xlsx")
+        print("Exportado con exito los pedidos a Excel")

@@ -1,5 +1,6 @@
 from typing import Dict
 from Mesa import Mesa
+from Exportador import Exportador
 
 class Cajero:
     def __init__(self):
@@ -10,7 +11,6 @@ class Cajero:
         if numero in self.mesas:
             print(f"La Mesa {numero} ya existente")
             return
-    
         self.mesas[numero] = Mesa(numero)
         print(f"Mesa {numero} fue creada con exito")
     
@@ -28,7 +28,8 @@ class Cajero:
                 print(f"Falta ${(mesa.total - dinero_cliente):.2f} para poder cubrir el total.")
                 return
             vuelto = dinero_cliente - mesa.total
-            self.ventas_dia.extend(mesa.pedidos)
+            self.ventas_dia.append(mesa)
+            Exportador.exportar_pedidos_excel(self.ventas_dia)
             self.mesas[numero_mesa] = Mesa(numero_mesa)
             print(f"Vuelto a dar al cliente es: {vuelto:.2f}")
         else:
