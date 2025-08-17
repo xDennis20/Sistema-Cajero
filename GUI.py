@@ -27,7 +27,7 @@ class App(customtkinter.CTk):
         self.boton_agregar_pedido.grid(pady=10)
         self.boton_cobrar_mesa = customtkinter.CTkButton(self.frame_botones,text="Cobrar mesa",font=("Arial",14),width=250, height=50, command=self.ventana_cobrar_mesa)
         self.boton_cobrar_mesa.grid(pady=10)
-        self.boton_mostrar_resumen_pedidos = customtkinter.CTkButton(self.frame_botones,text="Resumen de pedidos del dia",font=("Arial",14),width=250, height=50)
+        self.boton_mostrar_resumen_pedidos = customtkinter.CTkButton(self.frame_botones,text="Resumen de pedidos del dia",font=("Arial",14),width=250, height=50,command=self.ventana_resumen_dia)
         self.boton_mostrar_resumen_pedidos.grid(pady=10)
     
     def ventana_crear_mesa(self):
@@ -134,6 +134,30 @@ class App(customtkinter.CTk):
         boton_confirmar = customtkinter.CTkButton(frame,text="Confirmar",command=confirmar)
         boton_confirmar.grid(row=4,column=0,pady=5)
 
+    def ventana_resumen_dia(self):
+        resumen_texto= self.cajero.resumen_dia()
+        ventana = customtkinter.CTkToplevel(self)
+        ventana.title("Resumen del dia")
+        ventana.geometry("400x300")
+        ventana.wait_visibility()
+        ventana.grab_set()
+
+        frame = customtkinter.CTkFrame(ventana)
+        frame.grid(row=0,column=0,padx=10,pady=30,sticky="nsew")
+
+        label_titulo = customtkinter.CTkLabel(frame,text="Resumen del dia")
+        label_titulo.grid(row=0,column=0,pady=10)
+
+        textbox = customtkinter.CTkTextbox(frame, width=350, height=200)
+        textbox.grid(row=1,column=0,padx=10, pady=10, sticky="nsew")
+        textbox.insert("0.0", resumen_texto)
+        textbox.configure(state="disabled")
+
+        boton_cerrar = customtkinter.CTkButton(frame, text="Cerrar", command=ventana.destroy)
+        boton_cerrar.grid(row=2, column=0, pady=10)
+
+        frame.grid_rowconfigure(1, weight=1)
+        frame.grid_columnconfigure(0, weight=1)
         
 app = App()
 app.mainloop()

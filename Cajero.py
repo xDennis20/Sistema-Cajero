@@ -38,6 +38,7 @@ class Cajero:
             return "No existe la mesa"
 
     def resumen_dia(self):
-        print("*** RESUMEN DEL DIA ***")
+        resumen = "*** RESUMEN DEL DIA ***"
         for key,valor in self.mesas.items():
-            print(f"La Mesa {key} genero un total de ${valor.total:.2f}")
+            resumen+= f"La Mesa {key} genero un total de ${valor.total:.2f}"
+        return resumen
