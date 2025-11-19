@@ -32,10 +32,13 @@ class Cajero:
             Exportador.exportar_pedidos_excel(self.ventas_dia)
             self.mesas[numero_mesa] = Mesa(numero_mesa)
             print(f"Vuelto a dar al cliente es: {vuelto:.2f}")
+            return vuelto
         else:
             print("La mesa que ingreso no existe")
+            return "No existe la mesa"
 
     def resumen_dia(self):
-        print("*** RESUMEN DEL DIA ***")
+        resumen = "*** RESUMEN DEL DIA ***"
         for key,valor in self.mesas.items():
-            print(f"La Mesa {key} genero un total de ${valor.total:.2f}")
+            resumen+= f"La Mesa {key} genero un total de ${valor.total:.2f}"
+        return resumen
